@@ -1,11 +1,11 @@
 ajaxify-cart
 ============
 
-Ajaxify Your Shopify Cart.
+Snippet to ajaxify Your Shopify Cart.
 
-Use this only if your theme does not already use Ajax. 
+(Use this only if your theme does not already use Ajax, of course.)
 
-Those themes are officially supported:
+The following themes have been confirmed to work with the 'ajaxify-cart' solution without any configuration:
 
 * Minimal
 * New Standard
@@ -23,7 +23,7 @@ Then, include the ajaxify-cart snippet in your theme by pasting the code below i
 
 `{% include 'ajaxify-cart' %}`
 
-How to configure
+How to configure (optional)
 ================
 
 No configuration is necessary, but if you want or need to change a few things, go into your snippet and, at the bottom of it, change how the `Shopify.AjaxifyCart.init()` method is called, by passing to it a configuration object.
