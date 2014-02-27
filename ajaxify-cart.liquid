@@ -23,7 +23,7 @@ Shopify.AjaxifyCart = (function($) {
   };
   var _showFeedback = function(success, html, addToCartForm) {
     $('.ajaxified-cart-feedback').remove();
-    var feedback = '<p style="margin:20px 0" class="ajaxified-cart-feedback ' + success + '">' + html + '</p>';
+    var feedback = '<p class="ajaxified-cart-feedback ' + success + '">' + html + '</p>';
     switch (_config.feedbackPosition) {
       case 'aboveForm':
         addToCartForm.before(feedback).css('clear','both').slideDown();
@@ -87,26 +87,13 @@ Shopify.AjaxifyCart = (function($) {
               };
             });        
           }, 
-          error: function(XMLHttpRequest) {    
+          error: function(XMLHttpRequest) {
+            var response = eval('(' + XMLHttpRequest.response + ')');
             // Re-enable add to cart button.
-            addToCartBtn.removeAttr('disabled').removeClass('disabled');
-            // Changing the label to Sold Out.
-            addToCartBtn.val(soldOutBtnLabel);          
-            // Re-disable add to cart button.
-            addToCartBtn.attr('disabled','disabled').addClass('disabled');
-            // Show error message in alert.
-            var data = eval('(' + XMLHttpRequest.responseText + ')');
-            if (!!data.message) {
-              _showFeedback('error',data.message + '(' + data.status  + '): ' + data.description, addToCartForm);
-            } else {
-              var fullMessages = [];
-              $.each(data, function(attribute, messages) {
-                $.each(messages, function(index, message) {
-                  fullMessages.push(attribute + ' ' + message);
-                });
-              });
-              _showFeedback('error','Error : ' + fullMessages.join('; ') + '.',addToCartForm);
-            }
+            addToCartBtn.addClass('inverted').val(_config.soldOutBtnLabel);
+            _showFeedback('error', '&#x2715; ' + response.description, addToCartForm);
+            window.setTimeout(function(){            addToCartBtn.removeAttr('disabled').removeClass('disabled').removeClass('inverted').val(addToCartBtn.attr('data-label'));
+            }, _config.howLongTillBtnReturnsToNormal);
           }
         });   
         return false;    
@@ -133,3 +120,9 @@ Shopify.AjaxifyCart = (function($) {
 Shopify.AjaxifyCart.init();
 
 </script>
+
+<style>
+  .ajaxified-cart-feedback { margin:20px 0; }
+  .ajaxified-cart-feedback.success { color: #3D9970; }
+  .ajaxified-cart-feedback.error { color: #FF4136; }
+</style>
