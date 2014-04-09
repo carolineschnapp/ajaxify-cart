@@ -55,7 +55,7 @@ Shopify.AjaxifyCart = (function($) {
           success: function(itemData) {
             // Re-enable add to cart button.
             addToCartBtn.addClass('inverted').val(_config.addedToCartBtnLabel);
-            _showFeedback('success','✔ Added to cart! <a href="/cart">View cart</a> or <a href="/collections/all">continue shopping</a>.',addToCartForm);
+            _showFeedback('success','<i class="fa fa-check"></i> Added to cart! <a href="/cart">View cart</a> or <a href="/collections/all">continue shopping</a>.',addToCartForm);
             window.setTimeout(function(){
               addToCartBtn.removeAttr('disabled').removeClass('disabled').removeClass('inverted').val(addToCartBtn.attr('data-label'));
             }, _config.howLongTillBtnReturnsToNormal);
@@ -90,7 +90,7 @@ Shopify.AjaxifyCart = (function($) {
           error: function(XMLHttpRequest) {
             var response = eval('(' + XMLHttpRequest.response + ')');
             // Re-enable add to cart button and show error message.
-            _showFeedback('error', '&#x2715; ' + response.description, addToCartForm);
+            _showFeedback('error', '<i class="fa fa-warning"></i> ' + response.description.replace('All 1 ', 'All '), addToCartForm);
             addToCartBtn.removeAttr('disabled').removeClass('disabled').removeClass('inverted').val(addToCartBtn.attr('data-label'));
           }
         });   
@@ -118,6 +118,8 @@ Shopify.AjaxifyCart = (function($) {
 Shopify.AjaxifyCart.init();
 
 </script>
+
+{{ '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' | stylesheet_tag }}
 
 <style>
   .ajaxified-cart-feedback { margin:20px 0; }
