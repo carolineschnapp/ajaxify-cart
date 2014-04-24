@@ -89,9 +89,15 @@ Shopify.AjaxifyCart = (function($) {
           }, 
           error: function(XMLHttpRequest) {
             var response = eval('(' + XMLHttpRequest.response + ')');
-            // Re-enable add to cart button and show error message.
-            _showFeedback('error', '<i class="fa fa-warning"></i> ' + response.description.replace('All 1 ', 'All '), addToCartForm);
-            addToCartBtn.removeAttr('disabled').removeClass('disabled').removeClass('inverted').val(addToCartBtn.attr('data-label'));
+            response = response.description;
+            if (response.slice(0,4) === 'All ') {
+              _showFeedback('error', response.replace('All 1 ', 'All '), addToCartForm);
+              addToCartBtn.removeAttr('disabled').val(_config.soldOutBtnLabel).attr('disabled','disabled');
+            }
+            else {
+              _showFeedback('error', '<i class="fa fa-warning"></i> ' + response, addToCartForm);
+              addToCartBtn.removeAttr('disabled').removeClass('disabled').removeClass('inverted').val(addToCartBtn.attr('data-label'));
+            }
           }
         });   
         return false;    
