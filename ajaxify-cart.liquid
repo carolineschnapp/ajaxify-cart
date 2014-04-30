@@ -14,7 +14,7 @@ Shopify.AjaxifyCart = (function($) {
     addedToCartBtnLabel: 'Thank you!',
     addingToCartBtnLabel: 'Adding...',
     soldOutBtnLabel: 'Sold Out',
-    howLongTillBtnReturnsToNormal: 2000, // in milliseconds.
+    howLongTillBtnReturnsToNormal: 1000, // in milliseconds.
     cartCountSelector: '.cart, #cart-count a:first, #gocart p a, #cart .checkout em, .item-count',
     cartTotalSelector: '#cart-price',
     feedbackPosition:'nextButton', // 'aboveForm' for top of add to cart form, 'belowForm' for below the add to cart form, and 'nextButton' for next to add to cart button.
@@ -26,16 +26,17 @@ Shopify.AjaxifyCart = (function($) {
     var feedback = '<p class="ajaxified-cart-feedback ' + success + '">' + html + '</p>';
     switch (_config.feedbackPosition) {
       case 'aboveForm':
-        addToCartForm.before(feedback).css('clear','both').slideDown();
+        addToCartForm.before(feedback);
         break;
       case 'belowForm':
-        addToCartForm.after(feedback).css('clear','both').slideDown();
+        addToCartForm.after(feedback);
         break;
       case 'nextButton':
       default:
-        addToCartForm.find('input[type="submit"]').after(feedback).css('clear','both').slideDown();
-        break;
-    }  
+        addToCartForm.find('input[type="submit"]').after(feedback);
+        break;   
+    }
+    $('.ajaxified-cart-feedback').slideDown();
   };
   var _init = function() {   
     $(document).ready(function() { 
@@ -128,7 +129,15 @@ Shopify.AjaxifyCart.init();
 {{ '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' | stylesheet_tag }}
 
 <style>
-  .ajaxified-cart-feedback { margin:20px 0; }
-  .ajaxified-cart-feedback.success { color: #3D9970; }
-  .ajaxified-cart-feedback.error { color: #FF4136; }
+.ajaxified-cart-feedback {
+  display: inline;
+  padding-left: 10px;
+  margin: 20px 0;
+  line-height: 36px;
+  font-size: 80%;
+  vertical-align: middle;
+  clear:both;
+}
+.ajaxified-cart-feedback.success { color: #3D9970; }
+.ajaxified-cart-feedback.error { color: #FF4136; } 
 </style>
