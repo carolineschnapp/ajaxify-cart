@@ -3,7 +3,7 @@
 /**
  * Module to ajaxify all add to cart forms on the page.
  *
- * Copyright (c) 2013 Caroline Schnapp (11heavens.com)
+ * Copyright (c) 2014 Caroline Schnapp (11heavens.com)
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
@@ -17,7 +17,7 @@ Shopify.AjaxifyCart = (function($) {
     howLongTillBtnReturnsToNormal: 1000, // in milliseconds.
     cartCountSelector: '.cart, #cart-count a:first, #gocart p a, #cart .checkout em, .item-count',
     cartTotalSelector: '#cart-price',
-    feedbackPosition:'nextButton', // 'aboveForm' for top of add to cart form, 'belowForm' for below the add to cart form, and 'nextButton' for next to add to cart button.
+    feedbackPosition: 'nextButton', // 'aboveForm' for top of add to cart form, 'belowForm' for below the add to cart form, and 'nextButton' for next to add to cart button.
     shopifyAjaxAddURL: '/cart/add.js',
     shopifyAjaxCartURL: '/cart.js'
   };
