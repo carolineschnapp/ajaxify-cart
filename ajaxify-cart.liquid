@@ -89,7 +89,7 @@ Shopify.AjaxifyCart = (function($) {
             });        
           }, 
           error: function(XMLHttpRequest) {
-            var response = eval('(' + XMLHttpRequest.response + ')');
+            var response = eval('(' + XMLHttpRequest.responseText + ')');
             response = response.description;
             if (response.slice(0,4) === 'All ') {
               _showFeedback('error', response.replace('All 1 ', 'All '), addToCartForm);
