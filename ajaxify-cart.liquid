@@ -63,7 +63,7 @@ Shopify.AjaxifyCart = (function($) {
             // Update cart count and show cart link.
             $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
               if (_config.cartCountSelector && $(_config.cartCountSelector).size()) {
-                var value = $(_config.cartCountSelector).html();
+                var value = $(_config.cartCountSelector).html() || '0';
                 $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count));
               }
               if (_config.cartTotalSelector && $(_config.cartTotalSelector).size()) {
