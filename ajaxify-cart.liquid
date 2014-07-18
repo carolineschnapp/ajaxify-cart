@@ -67,7 +67,7 @@ Shopify.AjaxifyCart = (function($) {
                 $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count));
               }
               if (_config.cartTotalSelector && $(_config.cartTotalSelector).size()) {
-                if (typeof Currency !== 'undefined' && typeof Currency.money_format !== 'undefined') {
+                if (typeof Currency !== 'undefined' && typeof Currency.moneyFormats !== 'undefined') {
                   var newCurrency = '';
                   if ($('[name="currencies"]').size()) {
                     newCurrency = $('[name="currencies"]').val();
