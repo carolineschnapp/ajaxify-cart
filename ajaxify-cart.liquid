@@ -33,9 +33,13 @@ Shopify.AjaxifyCart = (function($) {
         break;
       case 'nextButton':
       default:
+        // In New Standard theme:
+        // addToCartForm.find('#product-add').append(feedback);
         addToCartForm.find('input[type="submit"]').after(feedback);
         break;   
     }
+    // If you use animate.css
+    // $('.ajaxified-cart-feedback').addClass('animated bounceInDown');
     $('.ajaxified-cart-feedback').slideDown();
   };
   var _init = function() {   
@@ -126,18 +130,29 @@ Shopify.AjaxifyCart.init();
 
 </script>
 
+{% comment %}
+If you want to animate your feedback message.
+{% endcomment %}
+{% comment %}
+{{ '//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.0/animate.min.css' | stylesheet_tag }}
+{% endcomment %}
 {{ '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' | stylesheet_tag }}
 
 <style>
 .ajaxified-cart-feedback {
+  /* Below add to cart button */
+  /* display: block; */
   display: inline;
   padding-left: 10px;
-  margin: 20px 0;
   line-height: 36px;
-  font-size: 80%;
+  font-size: 90%;
   vertical-align: middle;
-  clear:both;
 }
 .ajaxified-cart-feedback.success { color: #3D9970; }
 .ajaxified-cart-feedback.error { color: #FF4136; } 
+/* Making links stand out. */
+.ajaxified-cart-feedback a {
+  font-weight: bold;
+  border-bottom: 1px solid;
+}
 </style>
