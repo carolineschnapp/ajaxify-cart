@@ -23,12 +23,12 @@ Shopify.AjaxifyCart = (function($) {
     addingToCartBtnLabel:          'Adding...',
     soldOutBtnLabel:               'Sold Out',
     howLongTillBtnReturnsToNormal: 1000, // in milliseconds.
-    cartCountSelector:             '.cart, #cart-count a:first, #gocart p a, #cart .checkout em, .item-count',
+    cartCountSelector:             '.cart-count, #cart-count a:first, #gocart p a, #cart .checkout em, .item-count',
     cartTotalSelector:             '#cart-price',
     // 'aboveForm' for top of add to cart form, 
     // 'belowForm' for below the add to cart form, and 
     // 'nextButton' for next to add to cart button.
-    feedbackPosition:              'nextButton',  
+    feedbackPosition:              'nextButton',
     
     // What you will never need to change
     addToCartBtnSelector:          '[type="submit"]',
@@ -97,7 +97,7 @@ Shopify.AjaxifyCart = (function($) {
             $.getJSON(_config.shopifyAjaxCartURL, function(cart) {
               if (_config.cartCountSelector && $(_config.cartCountSelector).size()) {
                 var value = $(_config.cartCountSelector).html() || '0';
-                $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count));
+                $(_config.cartCountSelector).html(value.replace(/[0-9]+/,cart.item_count)).removeClass('hidden-count');
               }
               if (_config.cartTotalSelector && $(_config.cartTotalSelector).size()) {
                 if (typeof Currency !== 'undefined' && typeof Currency.moneyFormats !== 'undefined') {
